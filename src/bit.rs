@@ -1,5 +1,6 @@
 use std::ops::Not;
 use std::ops::BitAnd;
+use std::ops::BitOr;
 
 #[derive(PartialEq, Debug)]
 pub enum Bit { Zero, One }
@@ -111,5 +112,43 @@ mod bitwise_and_tests {
     #[test]
     fn bitwise_and_one_one_test() {
         assert_eq!(Bit::One & Bit::One, Bit::One);
+    }
+}
+
+impl BitOr for Bit {
+    type Output = Bit;
+
+    fn bitor(self, rhs: Bit) -> Bit {
+        match (self, rhs) {
+            (Bit::Zero, Bit::Zero) => Bit::Zero,
+            (Bit::Zero, Bit::One) => Bit::One,
+            (Bit::One, Bit::Zero) => Bit::One,
+            (Bit::One, Bit::One) => Bit::One
+        }
+    }
+}
+
+#[cfg(test)]
+mod bitwise_or_tests {
+    use super::*;
+
+    #[test]
+    fn bitwise_or_zero_zero_test() {
+        assert_eq!(Bit::Zero | Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_or_zero_one_test() {
+        assert_eq!(Bit::Zero | Bit::One, Bit::One);
+    }
+
+    #[test]
+    fn bitwise_or_one_zero_test() {
+        assert_eq!(Bit::One | Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn bitwise_or_one_one_test() {
+        assert_eq!(Bit::One | Bit::One, Bit::One);
     }
 }
