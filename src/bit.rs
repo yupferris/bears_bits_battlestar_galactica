@@ -75,12 +75,12 @@ mod to_i32_tests {
     use super::*;
 
     #[test]
-    fn to_i32_zero_test() {
+    fn zero_test() {
         assert_eq!(Bit::Zero.to_i32(), 0);
     }
 
     #[test]
-    fn to_i32_one_test() {
+    fn one_test() {
         assert_eq!(Bit::One.to_i32(), 1);
     }
 }
@@ -90,12 +90,12 @@ mod to_u32_tests {
     use super::*;
 
     #[test]
-    fn to_u32_zero_test() {
+    fn zero_test() {
         assert_eq!(Bit::Zero.to_u32(), 0);
     }
 
     #[test]
-    fn to_u32_one_test() {
+    fn one_test() {
         assert_eq!(Bit::One.to_u32(), 1);
     }
 }
@@ -121,12 +121,12 @@ mod not_tests {
     use super::*;
 
     #[test]
-    fn not_zero_test() {
+    fn zero_test() {
         assert_eq!(!Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn not_one_test() {
+    fn one_test() {
         assert_eq!(!Bit::One, Bit::Zero);
     }
 }
@@ -144,12 +144,12 @@ mod not_ref_tests {
     use super::*;
 
     #[test]
-    fn not_ref_zero_test() {
+    fn zero_test() {
         assert_eq!(!&Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn not_ref_one_test() {
+    fn one_test() {
         assert_eq!(!&Bit::One, Bit::Zero);
     }
 }
@@ -176,22 +176,22 @@ mod bitwise_and_tests {
     use super::*;
 
     #[test]
-    fn bitwise_and_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(Bit::Zero & Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(Bit::Zero & Bit::One, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(Bit::One & Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_one_one_test() {
+    fn one_one_test() {
         assert_eq!(Bit::One & Bit::One, Bit::One);
     }
 }
@@ -209,22 +209,22 @@ mod bitwise_and_ref_lhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_and_ref_lhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(&Bit::Zero & Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(&Bit::Zero & Bit::One, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(&Bit::One & Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(&Bit::One & Bit::One, Bit::One);
     }
 }
@@ -242,22 +242,22 @@ mod bitwise_and_ref_rhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_and_ref_rhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(Bit::Zero & &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_rhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(Bit::Zero & &Bit::One, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_rhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(Bit::One & &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_rhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(Bit::One & &Bit::One, Bit::One);
     }
 }
@@ -275,22 +275,22 @@ mod bitwise_and_ref_lhs_and_rhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(&Bit::Zero & &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(&Bit::Zero & &Bit::One, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(&Bit::One & &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(&Bit::One & &Bit::One, Bit::One);
     }
 }
@@ -318,22 +318,22 @@ mod bitwise_or_tests {
     use super::*;
 
     #[test]
-    fn bitwise_or_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(Bit::Zero | Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_or_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(Bit::Zero | Bit::One, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(Bit::One | Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_one_one_test() {
+    fn one_one_test() {
         assert_eq!(Bit::One | Bit::One, Bit::One);
     }
 }
@@ -351,22 +351,22 @@ mod bitwise_or_ref_lhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_or_ref_lhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(&Bit::Zero | Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_or_ref_lhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(&Bit::Zero | Bit::One, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_ref_lhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(&Bit::One | Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_ref_lhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(&Bit::One | Bit::One, Bit::One);
     }
 }
@@ -384,22 +384,22 @@ mod bitwise_or_ref_rhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_or_ref_rhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(Bit::Zero | &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_or_ref_rhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(Bit::Zero | &Bit::One, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_ref_rhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(Bit::One | &Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn bitwise_or_ref_rhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(Bit::One | &Bit::One, Bit::One);
     }
 }
@@ -417,22 +417,22 @@ mod bitwise_or_ref_lhs_and_rhs_tests {
     use super::*;
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_zero_zero_test() {
+    fn zero_zero_test() {
         assert_eq!(&Bit::Zero | &Bit::Zero, Bit::Zero);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_zero_one_test() {
+    fn zero_one_test() {
         assert_eq!(&Bit::Zero | &Bit::One, Bit::One);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_one_zero_test() {
+    fn one_zero_test() {
         assert_eq!(&Bit::One | &Bit::Zero, Bit::One);
     }
 
     #[test]
-    fn bitwise_and_ref_lhs_and_rhs_one_one_test() {
+    fn one_one_test() {
         assert_eq!(&Bit::One | &Bit::One, Bit::One);
     }
 }
