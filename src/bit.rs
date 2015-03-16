@@ -33,23 +33,23 @@ mod partial_eq_tests {
 
     #[test]
     #[should_panic]
-    fn neq_zero_zero_test() {
+    fn ne_zero_zero_test() {
         assert!(Bit::Zero != Bit::Zero);
     }
 
     #[test]
-    fn neq_zero_one_test() {
+    fn ne_zero_one_test() {
         assert!(Bit::Zero != Bit::One);
     }
 
     #[test]
-    fn neq_one_zero_test() {
+    fn ne_one_zero_test() {
         assert!(Bit::One != Bit::Zero);
     }
 
     #[test]
     #[should_panic]
-    fn neq_one_one_test() {
+    fn ne_one_one_test() {
         assert!(Bit::One != Bit::One);
     }
 }
