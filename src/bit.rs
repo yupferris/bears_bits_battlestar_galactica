@@ -5,6 +5,55 @@ use std::ops::BitOr;
 #[derive(PartialEq, Debug)]
 pub enum Bit { Zero, One }
 
+#[cfg(test)]
+mod partial_eq_tests {
+    use super::*;
+
+    #[test]
+    fn eq_zero_zero_test() {
+        assert!(Bit::Zero == Bit::Zero);
+    }
+
+    #[test]
+    #[should_panic]
+    fn eq_zero_one_test() {
+        assert!(Bit::Zero == Bit::One);
+    }
+
+    #[test]
+    #[should_panic]
+    fn eq_one_zero_test() {
+        assert!(Bit::One == Bit::Zero);
+    }
+
+    #[test]
+    fn eq_one_one_test() {
+        assert!(Bit::One == Bit::One);
+    }
+
+    #[test]
+    #[should_panic]
+    fn neq_zero_zero_test() {
+        assert!(Bit::Zero != Bit::Zero);
+    }
+
+    #[test]
+    fn neq_zero_one_test() {
+        assert!(Bit::Zero != Bit::One);
+    }
+
+    #[test]
+    fn neq_one_zero_test() {
+        assert!(Bit::One != Bit::Zero);
+    }
+
+    #[test]
+    #[should_panic]
+    fn neq_one_one_test() {
+        assert!(Bit::One != Bit::One);
+    }
+}
+
 impl Bit {
     pub fn to_i32(&self) -> i32 {
         match *self {
