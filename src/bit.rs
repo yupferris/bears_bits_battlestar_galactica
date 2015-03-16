@@ -55,10 +55,15 @@ impl Not for Bit {
     type Output = Bit;
 
     fn not(self) -> Bit {
-        match self {
-            Bit::Zero => Bit::One,
-            Bit::One => Bit::Zero
-        }
+        not_impl(&self)
+    }
+}
+
+fn not_impl(x: &Bit) -> Bit
+{
+    match *x {
+        Bit::Zero => Bit::One,
+        Bit::One => Bit::Zero
     }
 }
 
@@ -74,6 +79,31 @@ mod not_tests {
     #[test]
     fn not_one_test() {
         assert_eq!(!Bit::One, Bit::Zero);
+    }
+}
+
+impl<'a> Not for &'a Bit {
+    type Output = <Bit as Not>::Output;
+
+    fn not(self) -> <Bit as Not>::Output {
+        not_impl(self)
+    }
+}
+
+#[cfg(test)]
+mod not_ref_tests {
+    use super::*;
+
+    #[test]
+    fn not_ref_zero_test() {
+        let x = &Bit::Zero;
+        assert_eq!(!x, Bit::One);
+    }
+
+    #[test]
+    fn not_ref_one_test() {
+        let x = &Bit::One;
+        assert_eq!(!x, Bit::Zero);
     }
 }
 
