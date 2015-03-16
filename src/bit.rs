@@ -96,27 +96,29 @@ mod not_ref_tests {
 
     #[test]
     fn not_ref_zero_test() {
-        let x = &Bit::Zero;
-        assert_eq!(!x, Bit::One);
+        assert_eq!(!&Bit::Zero, Bit::One);
     }
 
     #[test]
     fn not_ref_one_test() {
-        let x = &Bit::One;
-        assert_eq!(!x, Bit::Zero);
+        assert_eq!(!&Bit::One, Bit::Zero);
     }
 }
 
-impl BitAnd for Bit {
+impl BitAnd<Bit> for Bit {
     type Output = Bit;
 
     fn bitand(self, rhs: Bit) -> Bit {
-        match (self, rhs) {
-            (Bit::Zero, Bit::Zero) => Bit::Zero,
-            (Bit::Zero, Bit::One) => Bit::Zero,
-            (Bit::One, Bit::Zero) => Bit::Zero,
-            (Bit::One, Bit::One) => Bit::One
-        }
+        bitand_impl(&self, &rhs)
+    }
+}
+
+fn bitand_impl(x: &Bit, y: &Bit) -> Bit {
+    match (x, y) {
+        (&Bit::Zero, &Bit::Zero) => Bit::Zero,
+        (&Bit::Zero, &Bit::One) => Bit::Zero,
+        (&Bit::One, &Bit::Zero) => Bit::Zero,
+        (&Bit::One, &Bit::One) => Bit::One
     }
 }
 
@@ -142,6 +144,105 @@ mod bitwise_and_tests {
     #[test]
     fn bitwise_and_one_one_test() {
         assert_eq!(Bit::One & Bit::One, Bit::One);
+    }
+}
+
+impl<'a> BitAnd<Bit> for &'a Bit {
+    type Output = <Bit as BitAnd<Bit>>::Output;
+
+    fn bitand(self, rhs: Bit) -> <Bit as BitAnd<Bit>>::Output {
+        bitand_impl(self, &rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_and_ref_lhs_tests {
+    use super::*;
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_zero_test() {
+        assert_eq!(&Bit::Zero & Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_one_test() {
+        assert_eq!(&Bit::Zero & Bit::One, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_zero_test() {
+        assert_eq!(&Bit::One & Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_one_test() {
+        assert_eq!(&Bit::One & Bit::One, Bit::One);
+    }
+}
+
+impl<'a> BitAnd<&'a Bit> for Bit {
+    type Output = <Bit as BitAnd<Bit>>::Output;
+
+    fn bitand(self, rhs: &'a Bit) -> <Bit as BitAnd<Bit>>::Output {
+        bitand_impl(&self, rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_and_ref_rhs_tests {
+    use super::*;
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_zero_test() {
+        assert_eq!(Bit::Zero & &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_one_test() {
+        assert_eq!(Bit::Zero & &Bit::One, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_zero_test() {
+        assert_eq!(Bit::One & &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_one_test() {
+        assert_eq!(Bit::One & &Bit::One, Bit::One);
+    }
+}
+
+impl<'a, 'b> BitAnd<&'a Bit> for &'b Bit {
+    type Output = <Bit as BitAnd<Bit>>::Output;
+
+    fn bitand(self, rhs: &'a Bit) -> <Bit as BitAnd<Bit>>::Output {
+        bitand_impl(self, rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_and_ref_lhs_and_rhs_tests {
+    use super::*;
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_zero_test() {
+        assert_eq!(&Bit::Zero & &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_zero_one_test() {
+        assert_eq!(&Bit::Zero & &Bit::One, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_zero_test() {
+        assert_eq!(&Bit::One & &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn bitwise_and_ref_lhs_one_one_test() {
+        assert_eq!(&Bit::One & &Bit::One, Bit::One);
     }
 }
 
