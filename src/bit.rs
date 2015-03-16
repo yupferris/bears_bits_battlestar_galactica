@@ -1,3 +1,6 @@
+use std::ops::Not;
+
+#[derive(PartialEq, Debug)]
 pub enum Bit { Zero, One }
 
 impl Bit {
@@ -17,7 +20,7 @@ impl Bit {
 }
 
 #[cfg(test)]
-mod tests {
+mod to_i32_tests {
     use super::*;
 
     #[test]
@@ -29,6 +32,11 @@ mod tests {
     fn to_i32_one_test() {
         assert_eq!(Bit::One.to_i32(), 1);
     }
+}
+
+#[cfg(test)]
+mod to_u32_tests {
+    use super::*;
 
     #[test]
     fn to_u32_zero_test() {
@@ -38,5 +46,31 @@ mod tests {
     #[test]
     fn to_u32_one_test() {
         assert_eq!(Bit::One.to_u32(), 1);
+    }
+}
+
+impl Not for Bit {
+    type Output = Bit;
+
+    fn not(self) -> Bit {
+        match self {
+            Bit::Zero => Bit::One,
+            Bit::One => Bit::Zero
+        }
+    }
+}
+
+#[cfg(test)]
+mod not_tests {
+    use super::*;
+
+    #[test]
+    fn not_zero_test() {
+        assert_eq!(!Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn not_one_test() {
+        assert_eq!(!Bit::One, Bit::Zero);
     }
 }
