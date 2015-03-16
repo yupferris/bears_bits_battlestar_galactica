@@ -2,7 +2,7 @@ use std::ops::Not;
 use std::ops::BitAnd;
 use std::ops::BitOr;
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Eq, Debug)]
 pub enum Bit { Zero, One }
 
 #[cfg(test)]
