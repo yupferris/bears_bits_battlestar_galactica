@@ -61,13 +61,6 @@ impl Bit {
             Bit::One => 1
         }
     }
-
-    pub fn to_u32(&self) -> u32 {
-        match *self {
-            Bit::Zero => 0u32,
-            Bit::One => 1u32
-        }
-    }
 }
 
 #[cfg(test)]
@@ -82,6 +75,15 @@ mod to_i32_tests {
     #[test]
     fn one_test() {
         assert_eq!(Bit::One.to_i32(), 1);
+    }
+}
+
+impl Bit {
+    pub fn to_u32(&self) -> u32 {
+        match *self {
+            Bit::Zero => 0u32,
+            Bit::One => 1u32
+        }
     }
 }
 
