@@ -4,7 +4,7 @@ use std::ops::BitOr;
 use std::ops::BitXor;
 use std::default::Default;
 
-#[derive(PartialEq, Eq, Debug, PartialOrd, Ord)]
+#[derive(PartialEq, Eq, Debug, PartialOrd, Ord, Clone)]
 pub enum Bit { Zero, One }
 
 #[cfg(test)]
