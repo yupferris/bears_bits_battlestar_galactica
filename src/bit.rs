@@ -1,6 +1,7 @@
 use std::ops::Not;
 use std::ops::BitAnd;
 use std::ops::BitOr;
+use std::ops::BitXor;
 use std::default::Default;
 
 #[derive(PartialEq, Eq, Debug)]
@@ -157,7 +158,7 @@ mod not_ref_tests {
     }
 }
 
-impl BitAnd<Bit> for Bit {
+impl BitAnd for Bit {
     type Output = Bit;
 
     fn bitand(self, rhs: Bit) -> Bit {
@@ -437,6 +438,147 @@ mod bitwise_or_ref_lhs_and_rhs_tests {
     #[test]
     fn one_one_test() {
         assert_eq!(&Bit::One | &Bit::One, Bit::One);
+    }
+}
+
+impl BitXor for Bit {
+    type Output = Bit;
+
+    fn bitxor(self, rhs: Bit) -> Bit {
+        bitxor_impl(&self, &rhs)
+    }
+}
+
+fn bitxor_impl(x: &Bit, y: &Bit) -> Bit {
+    match (x, y) {
+        (&Bit::Zero, &Bit::Zero) => Bit::Zero,
+        (&Bit::Zero, &Bit::One) => Bit::One,
+        (&Bit::One, &Bit::Zero) => Bit::One,
+        (&Bit::One, &Bit::One) => Bit::Zero
+    }
+}
+
+#[cfg(test)]
+mod bitwise_xor_tests {
+    use super::*;
+
+    #[test]
+    fn zero_zero_test() {
+        assert_eq!(Bit::Zero ^ Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn zero_one_test() {
+        assert_eq!(Bit::Zero ^ Bit::One, Bit::One);
+    }
+
+    #[test]
+    fn one_zero_test() {
+        assert_eq!(Bit::One ^ Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn one_one_test() {
+        assert_eq!(Bit::One ^ Bit::One, Bit::Zero);
+    }
+}
+
+impl<'a> BitXor<Bit> for &'a Bit {
+    type Output = <Bit as BitXor<Bit>>::Output;
+
+    fn bitxor(self, rhs: Bit) -> <Bit as BitXor<Bit>>::Output {
+        bitxor_impl(self, &rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_xor_ref_lhs_tests {
+    use super::*;
+
+    #[test]
+    fn zero_zero_test() {
+        assert_eq!(&Bit::Zero ^ Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn zero_one_test() {
+        assert_eq!(&Bit::Zero ^ Bit::One, Bit::One);
+    }
+
+    #[test]
+    fn one_zero_test() {
+        assert_eq!(&Bit::One ^ Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn one_one_test() {
+        assert_eq!(&Bit::One ^ Bit::One, Bit::Zero);
+    }
+}
+
+impl<'a> BitXor<&'a Bit> for Bit {
+    type Output = <Bit as BitXor<Bit>>::Output;
+
+    fn bitxor(self, rhs: &'a Bit) -> <Bit as BitXor<Bit>>::Output {
+        bitxor_impl(&self, rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_xor_ref_rhs_tests {
+    use super::*;
+
+    #[test]
+    fn zero_zero_test() {
+        assert_eq!(Bit::Zero ^ &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn zero_one_test() {
+        assert_eq!(Bit::Zero ^ &Bit::One, Bit::One);
+    }
+
+    #[test]
+    fn one_zero_test() {
+        assert_eq!(Bit::One ^ &Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn one_one_test() {
+        assert_eq!(Bit::One ^ &Bit::One, Bit::Zero);
+    }
+}
+
+impl<'a, 'b> BitXor<&'a Bit> for &'b Bit {
+    type Output = <Bit as BitXor<Bit>>::Output;
+
+    fn bitxor(self, rhs: &'a Bit) -> <Bit as BitXor<Bit>>::Output {
+        bitxor_impl(self, rhs)
+    }
+}
+
+#[cfg(test)]
+mod bitwise_xor_ref_lhs_and_rhs_tests {
+    use super::*;
+
+    #[test]
+    fn zero_zero_test() {
+        assert_eq!(&Bit::Zero ^ &Bit::Zero, Bit::Zero);
+    }
+
+    #[test]
+    fn zero_one_test() {
+        assert_eq!(&Bit::Zero ^ &Bit::One, Bit::One);
+    }
+
+    #[test]
+    fn one_zero_test() {
+        assert_eq!(&Bit::One ^ &Bit::Zero, Bit::One);
+    }
+
+    #[test]
+    fn one_one_test() {
+        assert_eq!(&Bit::One ^ &Bit::One, Bit::Zero);
     }
 }
 
