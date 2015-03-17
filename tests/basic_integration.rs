@@ -1,6 +1,6 @@
-extern crate bitstreams;
+extern crate bears_bits_battlestar_galactica;
 
-use bitstreams::Bit;
+use bears_bits_battlestar_galactica::Bit;
 
 #[test]
 fn basic_integration_test()
