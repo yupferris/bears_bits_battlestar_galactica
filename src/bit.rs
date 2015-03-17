@@ -1,6 +1,7 @@
 use std::ops::Not;
 use std::ops::BitAnd;
 use std::ops::BitOr;
+use std::default::Default;
 
 #[derive(PartialEq, Eq, Debug)]
 pub enum Bit { Zero, One }
@@ -436,5 +437,23 @@ mod bitwise_or_ref_lhs_and_rhs_tests {
     #[test]
     fn one_one_test() {
         assert_eq!(&Bit::One | &Bit::One, Bit::One);
+    }
+}
+
+impl Default for Bit {
+    fn default() -> Bit {
+        Bit::Zero
+    }
+}
+
+#[cfg(test)]
+mod default_tests {
+    use std::default::Default;
+    use super::*;
+
+    #[test]
+    fn test()
+    {
+        assert_eq!(Default::default(), Bit::Zero);
     }
 }
