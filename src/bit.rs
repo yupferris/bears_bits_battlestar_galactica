@@ -716,7 +716,7 @@ impl Error for ParseBitError {
     fn description(&self) -> &str { "failed to parse Bit" }
 }
 
-mod parse_bit_error_error_tests {
+mod parse_bit_error_description_tests {
     use std::error::Error;
     use super::*;
 
