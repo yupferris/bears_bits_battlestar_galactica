@@ -1,4 +1,4 @@
-# bitstreams
+# bears_bits_battlestar_galactica
 
 Basic bitwise reader/writer crate for Rust.
 
