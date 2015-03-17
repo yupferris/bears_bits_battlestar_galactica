@@ -619,6 +619,7 @@ impl FromStr for Bit {
 #[cfg(test)]
 mod from_str_tests {
     use std::str::FromStr;
+    use std::error::Error;
     use super::*;
 
     #[test]
@@ -637,6 +638,30 @@ mod from_str_tests {
     fn invalid()
     {
         assert!(<Bit as FromStr>::from_str("something else").is_err());
+    }
+
+    #[test]
+    fn error_display()
+    {
+        match <Bit as FromStr>::from_str("something else") {
+            Ok (..) => unreachable!(),
+            Err (e) =>
+                assert_eq!(
+                    format!("{}", e),
+                    "provided string was not `0` or `1`")
+        }
+    }
+
+    #[test]
+    fn error_message()
+    {
+        match <Bit as FromStr>::from_str("something else") {
+            Ok (..) => unreachable!(),
+            Err (ref e) =>
+                assert_eq!(
+                    Error::description(e),
+                    "failed to parse Bit")
+        }
     }
 }
 
@@ -667,7 +692,6 @@ mod display_tests {
     }
 }
 
-// TODO: Cover with additional tests?
 #[derive(PartialEq, Debug)]
 pub struct ParseBitError;
 
@@ -677,6 +701,29 @@ impl Display for ParseBitError {
     }
 }
 
+mod parse_bit_error_display_tests {
+    use super::*;
+
+    #[test]
+    fn display() {
+        assert_eq!(
+            format!("{}", ParseBitError),
+            "provided string was not `0` or `1`");
+    }
+}
+
 impl Error for ParseBitError {
     fn description(&self) -> &str { "failed to parse Bit" }
+}
+
+mod parse_bit_error_error_tests {
+    use std::error::Error;
+    use super::*;
+
+    #[test]
+    fn description() {
+        assert_eq!(
+            Error::description(&ParseBitError),
+            "failed to parse Bit");
+    }
 }
