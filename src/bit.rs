@@ -640,6 +640,33 @@ mod from_str_tests {
     }
 }
 
+impl Display for Bit {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        match *self {
+            Bit::Zero => "0",
+            Bit::One => "1"
+        }
+        .fmt(f)
+    }
+}
+
+#[cfg(test)]
+mod display_tests {
+    use super::*;
+
+    #[test]
+    fn zero_test()
+    {
+        assert_eq!(format!("{}", Bit::Zero), "0");
+    }
+
+    #[test]
+    fn one_test()
+    {
+        assert_eq!(format!("{}", Bit::One), "1");
+    }
+}
+
 // TODO: Cover with additional tests?
 #[derive(PartialEq, Debug)]
 pub struct ParseBitError;
