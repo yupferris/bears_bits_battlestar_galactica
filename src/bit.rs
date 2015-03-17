@@ -3,6 +3,10 @@ use std::ops::BitAnd;
 use std::ops::BitOr;
 use std::ops::BitXor;
 use std::default::Default;
+use std::str::FromStr;
+use std::fmt::{self, Display, Formatter};
+use std::result::Result::{self, Ok, Err};
+use std::error::Error;
 
 #[derive(PartialEq, Eq, Debug, PartialOrd, Ord, Clone)]
 pub enum Bit { Zero, One }
@@ -598,4 +602,54 @@ mod default_tests {
     {
         assert_eq!(Default::default(), Bit::Zero);
     }
+}
+
+impl FromStr for Bit {
+    type Err = ParseBitError;
+
+    fn from_str(s : &str) -> Result<Bit, ParseBitError> {
+        match s {
+            "0" => Ok(Bit::Zero),
+            "1" => Ok(Bit::One),
+            _ => Err(ParseBitError)
+        }
+    }
+}
+
+#[cfg(test)]
+mod from_str_tests {
+    use std::str::FromStr;
+    use super::*;
+
+    #[test]
+    fn zero_test()
+    {
+        assert_eq!(FromStr::from_str("0"), Ok(Bit::Zero));
+    }
+
+    #[test]
+    fn one_test()
+    {
+        assert_eq!(FromStr::from_str("1"), Ok(Bit::One));
+    }
+
+    #[test]
+    fn invalid_test()
+    {
+        assert!(<Bit as FromStr>::from_str("something else").is_err());
+    }
+}
+
+// TODO: Cover with additional tests?
+#[derive(PartialEq, Debug)]
+pub struct ParseBitError;
+
+impl Display for ParseBitError {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        "provided string was not `0` or `1`".fmt(f)
+    }
+}
+
+impl Error for ParseBitError {
+    fn description(&self) -> &str { "failed to parse Bit" }
 }
