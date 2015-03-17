@@ -8,7 +8,7 @@ use std::fmt::{self, Display, Formatter};
 use std::result::Result::{self, Ok, Err};
 use std::error::Error;
 
-#[derive(PartialEq, Eq, Debug, PartialOrd, Ord, Clone)]
+#[derive(PartialEq, Eq, Debug, PartialOrd, Ord, Clone, Hash)]
 pub enum Bit { Zero, One }
 
 #[cfg(test)]
