@@ -28,4 +28,19 @@ impl MemReader {
     fn new(buffer: Vec<u8>) -> MemReader {
         MemReader { buffer: buffer, pos: 0 }
     }
+
+    fn eof(&self) -> bool {
+        true
+    }
+}
+
+#[cfg(test)]
+mod mem_reader_tests {
+    use std::vec::Vec;
+    use super::*;
+
+    #[test]
+    fn empty_eof() {
+        assert!(MemReader::new(vec!()).eof());
+    }
 }
