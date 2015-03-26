@@ -34,13 +34,7 @@ impl MemReader {
     }
 }
 
-#[cfg(test)]
-mod mem_reader_tests {
-    use std::vec::Vec;
-    use super::*;
-
-    #[test]
-    fn empty_eof() {
-        assert!(MemReader::new(vec!()).eof());
-    }
+#[test]
+fn mem_reader_tests_empty_eof() {
+    assert!(MemReader::new(vec!()).eof());
 }
