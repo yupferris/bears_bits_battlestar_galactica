@@ -1,5 +1,3 @@
-#![feature(core)]
-
 mod bit;
 pub use self::bit::Bit;
 

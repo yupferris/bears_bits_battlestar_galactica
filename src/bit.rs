@@ -510,7 +510,8 @@ impl Default for Bit {
 #[test]
 fn default_tests_test()
 {
-    assert_eq!(Default::default(), Bit::Zero);
+    let def : Bit = Default::default();
+    assert_eq!(def, Bit::Zero);
 }
 
 impl FromStr for Bit {
